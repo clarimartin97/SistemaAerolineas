@@ -2,55 +2,55 @@ package dominio;
 
 public class Pasaje implements Comparable<Pasaje> {
 
-    private Cliente pasaporteCliente;
+    private Cliente cliente;
     private Vuelo codigoVuelo;
-    private String categoriaPasaje;
+    private int categoriaPasaje;
+    private String estado;
 
-    public Pasaje(Cliente pasaporteCliente, Vuelo codigoVuelo, String categoriaPasaje) {
-        this.pasaporteCliente = pasaporteCliente;
+    public Pasaje(Cliente cliente, Vuelo codigoVuelo, int categoriaPasaje, String estado) {
+        this.cliente = cliente;
         this.codigoVuelo = codigoVuelo;
         this.categoriaPasaje = categoriaPasaje;
+        this.estado = estado;
     }
 
-    /**
-     * @return the pasaporteCliente
-     */
     public Cliente getPasaporteCliente() {
-        return pasaporteCliente;
+        return cliente;
     }
 
-    /**
-     * @param pasaporteCliente the pasaporteCliente to set
-     */
     public void setPasaporteCliente(Cliente pasaporteCliente) {
-        this.pasaporteCliente = pasaporteCliente;
+        this.cliente = pasaporteCliente;
     }
 
-    /**
-     * @return the codigoVuelo
-     */
     public Vuelo getCodigoVuelo() {
         return codigoVuelo;
     }
 
-    /**
-     * @param codigoVuelo the codigoVuelo to set
-     */
     public void setCodigoVuelo(Vuelo codigoVuelo) {
         this.codigoVuelo = codigoVuelo;
     }
 
-    public String getCategoriaPasaje() {
+    public int getCategoriaPasaje() {
         return categoriaPasaje;
     }
 
-    public void setCategoriaPasaje(String categoriaPasaje) {
+    public void setCategoriaPasaje(int categoriaPasaje) {
         this.categoriaPasaje = categoriaPasaje;
     }
+ 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
 
     @Override
     public int compareTo(Pasaje o) {
-        return this.getCategoriaPasaje().compareTo(o.getCategoriaPasaje());
+        return this.getPasaporteCliente().compareTo(o.getPasaporteCliente());
     }
 
+   
 }

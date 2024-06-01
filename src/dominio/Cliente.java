@@ -46,9 +46,18 @@ public class Cliente implements Comparable<Cliente> {
 
     }
 
+    public ListaSimple<Pasaje> getPasajesCompradosDevueltos() {
+        return pasajesCompradosDevueltos;
+    }
+
+    public void setPasajesCompradosDevueltos(ListaSimple<Pasaje> pasajesCompradosDevueltos) {
+        this.pasajesCompradosDevueltos = pasajesCompradosDevueltos;
+    }
+
     @Override
     public int compareTo(Cliente o) {
         return this.getPasaporte().compareTo(o.getPasaporte());
     }
 
+ 
 }
