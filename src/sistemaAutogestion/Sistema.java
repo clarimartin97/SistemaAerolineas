@@ -175,6 +175,7 @@ public class Sistema implements IObligatorio {
 
     @Override
     public Retorno comprarPasaje(String pasaporteCliente, String codigoVuelo, int categoríaPasaje) {
+
         Nodo<Cliente> nodoCliente = clientes.obtenerElemento(new Cliente("", pasaporteCliente, 0));
         if (nodoCliente == null) {
             return new Retorno(Retorno.Resultado.ERROR_1);
@@ -205,13 +206,43 @@ public class Sistema implements IObligatorio {
         }
         return new Retorno(Retorno.Resultado.OK);
     }
-    
+
     //falta chequear si el pasaje ya se encuentra en la matriz
     //agregar a todas las listas necesarias
-
     @Override
     public Retorno devolverPasaje(String pasaporteCliente, String codigoVuelo) {
-        return Retorno.noImplementada();
+        Nodo<Cliente> nodoCliente = clientes.obtenerElemento(new Cliente("", pasaporteCliente, 0));
+        if (nodoCliente == null) {
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+        Nodo<Vuelo> nodoVuelo = vuelos.obtenerElemento(new Vuelo(codigoVuelo, null, null, "", 0, 0, 0, 0, 0));
+        if (nodoVuelo == null) {
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+        Nodo<Pasaje> nodoPasaje = nodoCliente.getDato().getPasajesCompradosDevueltos().obtenerElemento(new Pasaje(nodoCliente.getDato(), nodoVuelo.getDato(), 0, ""));
+        if (nodoPasaje == null) {
+            return new Retorno(Retorno.Resultado.ERROR_3);
+        }
+        nodoPasaje.getDato().setEstado("Dev");
+        
+        if (nodoPasaje.getDato().getCategoriaPasaje() == 1) {
+            nodoVuelo.getDato().getPasajesPrim().eliminarValor(nodoPasaje.getDato());
+            nodoVuelo.getDato().setNumeroCompradosPrim(nodoVuelo.getDato().getNumeroCompradosPrim() - 1);
+            if (!nodoVuelo.getDato().getColaEsperaPrimera().esVacia()) {
+                Pasaje nuevaCompra = nodoVuelo.getDato().getColaEsperaPrimera().frente().getDato();
+                nodoVuelo.getDato().getColaEsperaPrimera().desencolar();
+                comprarPasaje(nuevaCompra.getPasaporteCliente().getPasaporte(), nuevaCompra.getCodigoVuelo().getCodigoVuelo(), nuevaCompra.getCategoriaPasaje());
+            }
+        } else {
+            nodoVuelo.getDato().getPasajesEcon().eliminarValor(nodoPasaje.getDato());
+            nodoVuelo.getDato().setNumeroCompradosEcon(nodoVuelo.getDato().getNumeroCompradosEcon() - 1);
+            if (!nodoVuelo.getDato().getColaEsperaEconomica().esVacia()) {
+                Pasaje nuevaCompra = nodoVuelo.getDato().getColaEsperaEconomica().frente().getDato();
+                nodoVuelo.getDato().getColaEsperaEconomica().desencolar();
+                comprarPasaje(nuevaCompra.getPasaporteCliente().getPasaporte(), nuevaCompra.getCodigoVuelo().getCodigoVuelo(), nuevaCompra.getCategoriaPasaje());
+            }
+        }
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
