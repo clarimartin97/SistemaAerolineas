@@ -15,9 +15,9 @@ public class Vuelo implements Comparable<Vuelo> {
     private int anio;
     private int cantPasajesEcon;
     private int cantPasajesPClase;
-    private Matriz<Pasaje> pasajesPrim;
+    private ListaSimple<Pasaje> pasajesPrim;
     private int numeroCompradosPrim;
-    private Matriz<Pasaje> pasajesEcon;
+    private ListaSimple<Pasaje> pasajesEcon;
     private int numeroCompradosEcon;
     private Cola<Pasaje> colaEsperaPrimera;
     private Cola<Pasaje> colaEsperaEconomica;
@@ -33,9 +33,9 @@ public class Vuelo implements Comparable<Vuelo> {
         this.setAnio(_anio);
         this.setCantPasajesEcon(_cantPasajesEcon);
         this.setCantPasajesPClase(_cantPasajesPClase);
-        this.pasajesPrim = new Matriz<Pasaje>(cantPasajesPClase / 3,3);
+        this.pasajesPrim = new ListaSimple<Pasaje>();
         this.numeroCompradosPrim = 0;
-        this.pasajesEcon = new Matriz<Pasaje>(cantPasajesEcon / 3,3);
+        this.pasajesEcon = new ListaSimple<Pasaje>();
         this.numeroCompradosEcon = 0;
         this.colaEsperaPrimera = new Cola<>();
         this.colaEsperaEconomica = new Cola<>();
@@ -154,20 +154,20 @@ public class Vuelo implements Comparable<Vuelo> {
     }
 
 
-    public Matriz<Pasaje> getPasajesPrim() {
+    public ListaSimple<Pasaje> getPasajesPrim() {
         return pasajesPrim;
     }
 
 
-    public void setPasajesPrim(Matriz<Pasaje> pasajesPrim) {
+    public void setPasajesPrim(ListaSimple<Pasaje> pasajesPrim) {
         this.pasajesPrim = pasajesPrim;
     }
 
-    public Matriz<Pasaje> getPasajesEcon() {
+    public ListaSimple<Pasaje> getPasajesEcon() {
         return pasajesEcon;
     }
     
-    public void setPasajesEcon(Matriz<Pasaje> pasajesEcon) {
+    public void setPasajesEcon(ListaSimple<Pasaje> pasajesEcon) {
         this.pasajesEcon = pasajesEcon;
     }
 
