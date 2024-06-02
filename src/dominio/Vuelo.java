@@ -123,4 +123,16 @@ public class Vuelo implements Comparable<Vuelo> {
     public int compareTo(Vuelo o) {
         return this.getCodAvion().compareTo(o.getCodAvion());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Vuelo vuelo = (Vuelo) obj;
+        return codAvion.equals(vuelo.codAvion);
+    }
 }

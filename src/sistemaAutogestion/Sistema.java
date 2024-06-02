@@ -104,16 +104,16 @@ public class Sistema implements IObligatorio {
     }
 
     @Override
-    public Retorno registrarCliente(String pasaporte, String nombre, int edad) {
+    public Retorno registrarCliente(String nombre, String pasaporte, int edad) {
         if (edad <= 0) {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
         if (pasaporte == null || pasaporte.length() != 7) {
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
-        Cliente cliente = new Cliente(pasaporte, nombre, edad);
+        Cliente cliente = new Cliente(nombre, pasaporte, edad);
         Nodo<Cliente> nodoExistente = clientes.obtenerElemento(cliente);
-        if (nodoExistente != null && nodoExistente.getDato().getPasaporte().equals(pasaporte)) {
+        if (nodoExistente != null) {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
         clientes.agregarOrd(cliente);
@@ -121,56 +121,63 @@ public class Sistema implements IObligatorio {
     }
 
     @Override
-    public Retorno crearVuelo(String codigoVuelo, Aerolinea aerolinea, Avion codAvion, String paisDestino, int dia, int mes, int año, int cantPasajesEcon, int cantPasajesPClase) {
-     // Verificación de existencia de código de vuelo
-     Nodo<Aerolinea> nodoAerolinea = aerolineas.obtenerElemento(new Aerolinea(aerolinea.getNombre(), "", 0));
-     Nodo<Avion> nodoAvion = nodoAerolinea.getDato().getAviones().obtenerElemento(new Avion(codAvion.getCodigo(), 0, nodoAerolinea.getDato());   
-     Nodo<Vuelo> nodoVueloExistente = vuelos.obtenerElemento(new Vuelo(codigoVuelo,nodoAerolinea.getDato(), nodoAvion.getDato(), paisDestino, dia, mes, año, cantPasajesEcon, cantPasajesPClase));
-        if (nodoVueloExistente != null) {
+    public Retorno crearVuelo(String codigoVuelo, String aerolinea, String codAvion, String paisDestino, int dia,
+            int mes, int anio, int cantPasajesEcon, int cantPasajesPClase) {
+
+        // Verificación de existencia de código de vuelo
+        Nodo<Aerolinea> nodoAerolinea = aerolineas.obtenerElemento(new Aerolinea(aerolinea, "", 0));
+        Nodo<Avion> nodoAvion = nodoAerolinea.getDato().getAviones()
+                .obtenerElemento(new Avion(codAvion, 0, nodoAerolinea.getDato()));
+
+        if (vuelos.obtenerElemento(new Vuelo(codigoVuelo, nodoAerolinea.getDato(), nodoAvion.getDato(), paisDestino,
+                dia, mes, anio, cantPasajesEcon, cantPasajesPClase)) != null) {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
-        if (nodoAerolinea == null) {
+
+        // Verificación de existencia de la aerolínea
+        Nodo<Aerolinea> nodoAerolinea2 = aerolineas.obtenerElemento(new Aerolinea(aerolinea, "", 0));
+        if (nodoAerolinea2 == null) {
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
-        if (nodoAvion == null) {
-            return new Retorno(Retorno.Resultado.ERROR_3);
-        }
-
+        
+        // Verificación de que no exista un vuelo para ese avión en la misma fecha
         Nodo<Vuelo> auxVuelo = vuelos.getInicio();
         while (auxVuelo != null) {
             Vuelo vuelo = auxVuelo.getDato();
-            if (vuelo.getCodAvion().equals(nodoAvion.getDato()) && vuelo.getDia() == dia && vuelo.getMes() == mes && vuelo.getAnio() == año) {
-                return new Retorno(Retorno.Resultado.ERROR_4);
+            if (vuelo.getCodAvion().equals(nodoAvion.getDato()) && vuelo.getDia() == dia &&
+                    vuelo.getMes() == mes
+                    && vuelo.getAnio() == anio) {
+                return new Retorno(Retorno.Resultado.ERROR_3);
             }
             auxVuelo = auxVuelo.getSiguiente();
         }
-
+        
         // Verificación de que las cantidades de pasajes sean múltiplos de 3 y >= 3
-        if (cantPasajesEcon < 3 || cantPasajesEcon % 3 != 0 || cantPasajesPClase < 3 || cantPasajesPClase % 3 != 0) {
-            return new Retorno(Retorno.Resultado.ERROR_5);
-        }
-
-        // Verificación de que la suma de los pasajes no exceda la capacidad del avión
-        int capacidadAvion = nodoAvion.getDato().getCapacidadMax();
-        if (cantPasajesEcon + cantPasajesPClase > capacidadAvion) {
-            return new Retorno(Retorno.Resultado.ERROR_4);
-        }
-
-        // Ajuste de cantidad de pasajes económicos si es necesario
-        int totalPasajes = cantPasajesEcon + cantPasajesPClase;
-        if (totalPasajes < capacidadAvion) {
-            cantPasajesEcon += capacidadAvion - totalPasajes;
-        }
-/* 
-        // Creación y registro del vuelo
-        Vuelo nuevoVuelo = new Vuelo(codigoVuelo, nodoAerolinea.getDato(), nodoAvion.getDato(), paisDestino, dia, mes, año);
-        nuevoVuelo.setCantPasajesEcon(cantPasajesEcon);
-        nuevoVuelo.setCantPasajesPClase(cantPasajesPClase);
-        vuelos.agregarOrd(nuevoVuelo); */
-
-        return new Retorno(Retorno.Resultado.OK);
-    }
-
+       if (cantPasajesEcon < 3 || cantPasajesEcon % 3 != 0 || cantPasajesPClase < 3
+       || cantPasajesPClase % 3 != 0) {
+       return new Retorno(Retorno.Resultado.ERROR_4);
+       }
+          
+       // Verificación de que la suma de los pasajes no exceda la capacidad del avión
+       int capacidadAvion = nodoAvion.getDato().getCapacidadMax();
+       if (cantPasajesEcon + cantPasajesPClase > capacidadAvion) {
+       return new Retorno(Retorno.Resultado.ERROR_5);
+       }
+          
+       // Ajuste de cantidad de pasajes económicos si es necesario
+       int totalPasajes = cantPasajesEcon + cantPasajesPClase;
+       if (totalPasajes < capacidadAvion) {
+       cantPasajesEcon += capacidadAvion - totalPasajes;
+       }
+          
+          // Creación y registro del vuelo
+       Vuelo nuevoVuelo = new Vuelo(codigoVuelo, nodoAerolinea.getDato(),
+       nodoAvion.getDato(), paisDestino, dia, mes,
+       anio, cantPasajesEcon, cantPasajesPClase);
+       nuevoVuelo.setCantPasajesEcon(cantPasajesEcon);
+       nuevoVuelo.setCantPasajesPClase(cantPasajesPClase);
+       vuelos.agregarOrd(nuevoVuelo);
+       return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
@@ -208,7 +215,9 @@ public class Sistema implements IObligatorio {
 
     @Override
     public Retorno listarClientes() {
-        return Retorno.noImplementada();
+        Retorno r = new Retorno(Retorno.Resultado.OK);
+        r.valorString = clientes.mostrarREC();
+        return r;
     }
 
     @Override

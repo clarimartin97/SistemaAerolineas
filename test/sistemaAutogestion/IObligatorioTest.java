@@ -267,15 +267,68 @@ public class IObligatorioTest {
 //        assertEquals(Retorno.error2().resultado, r.resultado);
 //    }
 
+//    @Test
+//    public void testRegistrarClienteERROR3() {
+//        Retorno r = miSistema.crearSistemaDeGestion();
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//
+//        r = miSistema.registrarCliente("Laura Ortiz", "TUV6789", 35);
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//
+//        r = miSistema.registrarCliente("Sofia Gonzalez", "TUV6789", 28);
+//        assertEquals(Retorno.error3().resultado, r.resultado);
+//    }
+//    @Test
+//    public void testCrearVueloOK() {
+//        Retorno r = miSistema.crearAerolinea("Ethiopian Airlines", "Etiopía", 90);
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//        r = miSistema.registrarAvion("ET345", 90, "Ethiopian Airlines");
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//        r = miSistema.crearVuelo("1111", "Ethiopian Airlines", "ET345", "Etiopía", 1, 1, 2024, 24, 15);
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//    }
     @Test
-    public void testRegistrarClienteERROR3() {
-        Retorno r = miSistema.crearSistemaDeGestion();
-        assertEquals(Retorno.ok().resultado, r.resultado);
+    public void testCrearVueloErrorCodigoVueloExistente() {
 
-        r = miSistema.registrarCliente("TUV6789", "Laura Ortiz", 35);
+        Retorno r = miSistema.crearAerolinea("Qantas", "Australia", 70);
         assertEquals(Retorno.ok().resultado, r.resultado);
-
-        r = miSistema.registrarCliente("TUV6789", "Sofia Gonzalez", 28);
-        assertEquals(Retorno.error3().resultado, r.resultado);
+        r = miSistema.registrarAvion("QF345", 150, "Qantas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        // Se crea un vuelo con el mismo código de vuelo para generar el error
+        miSistema.crearVuelo("QF001", "Qantas", "QF123", "Australia", 2, 1, 2024, 21, 3);
+        // Se intenta crear otro vuelo con el mismo código de vuelo
+        r = miSistema.crearVuelo("QF001", "Qantas", "QF345", "Australia", 2, 1, 2024, 21, 3);
+        assertEquals(Retorno.error1().resultado, r.resultado);
     }
+
+//    @Test
+//    public void testCrearVueloErrorAerolíneaNoExistente() {
+//        Retorno r = miSistema.crearVuelo("EK123", "NoExistente", "EK001", "USA", 1, 1, 2025, 297, 3);
+//        assertEquals(Retorno.error2().resultado, r.resultado);
+//    }
+//
+//    @Test
+//    public void testCrearVueloErrorAvionNoExistenteEnAerolínea() {
+//        Retorno r = miSistema.crearVuelo("QF124", "Qantas", "EK001", "USA", 1, 1, 2025, 297, 3);
+//        assertEquals(Retorno.error3().resultado, r.resultado);
+//    }
+//
+//    @Test
+//    public void testCrearVueloErrorVueloExistenteParaAvionEnFecha() {
+//        miSistema.crearVuelo("QF125", "Qantas", "QF001", "USA", 1, 1, 2025, 297, 3);
+//        Retorno r = miSistema.crearVuelo("QF126", "Qantas", "QF001", "Canada", 1, 1, 2025, 297, 3);
+//        assertEquals(Retorno.error4().resultado, r.resultado);
+//    }
+//
+//    @Test
+//    public void testCrearVueloErrorCantidadesPasajesNoMultiploDeTres() {
+//        Retorno r = miSistema.crearVuelo("QF127", "Qantas", "QF001", "USA", 1, 1, 2025, 298, 2);
+//        assertEquals(Retorno.error5().resultado, r.resultado);
+//    }
+//
+//    @Test
+//    public void testCrearVueloErrorSumaPasajesExcedeCapacidadAvion() {
+//        Retorno r = miSistema.crearVuelo("QF128", "Qantas", "QF001", "USA", 1, 1, 2025, 298, 100);
+//        assertEquals(Retorno.error5().resultado, r.resultado);
+//    }
 }

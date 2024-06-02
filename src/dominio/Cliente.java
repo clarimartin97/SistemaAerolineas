@@ -50,5 +50,19 @@ public class Cliente implements Comparable<Cliente> {
     public int compareTo(Cliente o) {
         return this.getPasaporte().compareTo(o.getPasaporte());
     }
+    @Override
+    public boolean equals(Object obj) {
+ 
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Cliente other = (Cliente) obj;
+        return this.getPasaporte().equals(other.getPasaporte());
+    }
+    
 
 }
