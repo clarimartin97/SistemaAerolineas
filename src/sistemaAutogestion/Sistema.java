@@ -225,14 +225,14 @@ public class Sistema implements IObligatorio {
         }
         nodoPasaje.getDato().setEstado("Dev");
         nodoVuelo.getDato().getAerolinea().getPasajesDevueltos().agregarInicio(nodoPasaje.getDato()); //Agrego lista Aerolinea
-        
+
         if (nodoPasaje.getDato().getCategoriaPasaje() == 1) {
             nodoVuelo.getDato().getPasajesPrim().borrarElemento(nodoPasaje.getDato());
             nodoVuelo.getDato().setNumeroCompradosPrim(nodoVuelo.getDato().getNumeroCompradosPrim() - 1);
             if (!nodoVuelo.getDato().getColaEsperaPrimera().esVacia()) {
                 Pasaje nuevaCompra = nodoVuelo.getDato().getColaEsperaPrimera().frente().getDato();
                 nodoVuelo.getDato().getColaEsperaPrimera().desencolar();
-                comprarPasaje(nuevaCompra.getPasaporteCliente().getPasaporte(), nuevaCompra.getCodigoVuelo().getCodigoVuelo(), nuevaCompra.getCategoriaPasaje());
+                comprarPasaje(nuevaCompra.getCliente().getPasaporte(), nuevaCompra.getVuelo().getCodigoVuelo(), nuevaCompra.getCategoriaPasaje());
             }
         } else {
             nodoVuelo.getDato().getPasajesEcon().borrarElemento(nodoPasaje.getDato());
@@ -240,7 +240,7 @@ public class Sistema implements IObligatorio {
             if (!nodoVuelo.getDato().getColaEsperaEconomica().esVacia()) {
                 Pasaje nuevaCompra = nodoVuelo.getDato().getColaEsperaEconomica().frente().getDato();
                 nodoVuelo.getDato().getColaEsperaEconomica().desencolar();
-                comprarPasaje(nuevaCompra.getPasaporteCliente().getPasaporte(), nuevaCompra.getCodigoVuelo().getCodigoVuelo(), nuevaCompra.getCategoriaPasaje());
+                comprarPasaje(nuevaCompra.getCliente().getPasaporte(), nuevaCompra.getVuelo().getCodigoVuelo(), nuevaCompra.getCategoriaPasaje());
             }
         }
         return new Retorno(Retorno.Resultado.OK);
@@ -249,7 +249,7 @@ public class Sistema implements IObligatorio {
     @Override
     public Retorno listarAerolineas() {
         Retorno r = new Retorno(Retorno.Resultado.OK);
-        r.valorString = aerolineas.mostrarREC();
+        r.valorString = aerolineas.mostrar();
         return r;
     }
 
@@ -265,7 +265,7 @@ public class Sistema implements IObligatorio {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
         Nodo<Aerolinea> nodoAerolinea = aerolineas.obtenerElemento(new Aerolinea(nombre, "", 0));
-        r.valorString = nodoAerolinea.getDato().getAviones().mostrarREC();
+        r.valorString = nodoAerolinea.getDato().getAviones().mostrar();
         return r;
     }
 
@@ -286,7 +286,15 @@ public class Sistema implements IObligatorio {
 
     @Override
     public Retorno pasajesDevueltos(String nombreAerolinea) {
-        return Retorno.noImplementada();
+        Retorno r = new Retorno(Retorno.Resultado.OK);
+        Nodo<Aerolinea> nodoAerolinea = aerolineas.obtenerElemento(new Aerolinea(nombreAerolinea, "", 0));
+
+        if (nodoAerolinea.getDato() == null) {
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+
+        r.valorString = nodoAerolinea.getDato().getPasajesDevueltos().mostrar();
+        return r;
     }
 
     @Override

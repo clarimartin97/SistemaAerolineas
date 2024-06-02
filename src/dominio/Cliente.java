@@ -42,7 +42,7 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public String toString() {
-        return this.getNombre() + "-" + this.getPasaporte() + "-" + getEdad();
+        return this.getPasaporte() + "-" + this.getNombre() + "-" + getEdad()+"|";
 
     }
 

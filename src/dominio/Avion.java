@@ -32,7 +32,7 @@ public class Avion implements Comparable<Avion> {
     }
 
     public String toString() {
-        return this.getCodigo() + "-" + getCapacidadMax();
+        return this.getCodigo() + "-" + getCapacidadMax()+"|";
     }
 
     @Override

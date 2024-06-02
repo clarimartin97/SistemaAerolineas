@@ -14,7 +14,7 @@ public interface IListaSimple<T extends Comparable<T>> {
 
     public void vaciar();
 
-    public void mostrar();
+    public String mostrar();
 
     public void agregarOrd(T n);
     

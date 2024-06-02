@@ -3,31 +3,31 @@ package dominio;
 public class Pasaje implements Comparable<Pasaje> {
 
     private Cliente cliente;
-    private Vuelo codigoVuelo;
+    private Vuelo vuelo;
     private int categoriaPasaje;
     private String estado;
 
     public Pasaje(Cliente cliente, Vuelo codigoVuelo, int categoriaPasaje, String estado) {
         this.cliente = cliente;
-        this.codigoVuelo = codigoVuelo;
+        this.vuelo = vuelo;
         this.categoriaPasaje = categoriaPasaje;
         this.estado = estado;
     }
 
-    public Cliente getPasaporteCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setPasaporteCliente(Cliente pasaporteCliente) {
-        this.cliente = pasaporteCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Vuelo getCodigoVuelo() {
-        return codigoVuelo;
+    public Vuelo getVuelo() {
+        return vuelo;
     }
 
-    public void setCodigoVuelo(Vuelo codigoVuelo) {
-        this.codigoVuelo = codigoVuelo;
+    public void setVuelo(Vuelo Vuelo) {
+        this.vuelo = Vuelo;
     }
 
     public int getCategoriaPasaje() {
@@ -45,11 +45,16 @@ public class Pasaje implements Comparable<Pasaje> {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
+    public String toString() {
+        return this.cliente.getPasaporte() + "-" + this.getVuelo();
+
+    }
 
 
     @Override
     public int compareTo(Pasaje o) {
-        return this.getPasaporteCliente().compareTo(o.getPasaporteCliente());
+        return this.getCliente().compareTo(o.getCliente());
     }
 
    
