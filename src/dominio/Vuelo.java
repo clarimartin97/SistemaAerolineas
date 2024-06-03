@@ -129,11 +129,16 @@ public class Vuelo implements Comparable<Vuelo> {
     public void setColaEsperaEconomica(Cola<Pasaje> colaEsperaEconomica) {
         this.colaEsperaEconomica = colaEsperaEconomica;
     }
+    @Override
+    public String toString() {
+        return this.getCodigoVuelo() + "-" + this.getAerolinea() + "-" + this.getCodAvion() + "|" ;
+    }
 
     @Override
     public int compareTo(Vuelo o) {
         return this.getCodAvion().compareTo(o.getCodAvion());
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -146,7 +151,6 @@ public class Vuelo implements Comparable<Vuelo> {
         return codAvion.equals(vuelo.codAvion);
     }
 
-
     public int getNumeroCompradosPrim() {
         return numeroCompradosPrim;
     }
@@ -154,7 +158,6 @@ public class Vuelo implements Comparable<Vuelo> {
     public void setNumeroCompradosPrim(int numeroCompradosPrim) {
         this.numeroCompradosPrim = numeroCompradosPrim;
     }
-
 
     public int getNumeroCompradosEcon() {
         return numeroCompradosEcon;
@@ -164,11 +167,9 @@ public class Vuelo implements Comparable<Vuelo> {
         this.numeroCompradosEcon = numeroCompradosEcon;
     }
 
-
     public ListaSimple<Pasaje> getPasajesPrim() {
         return pasajesPrim;
     }
-
 
     public void setPasajesPrim(ListaSimple<Pasaje> pasajesPrim) {
         this.pasajesPrim = pasajesPrim;
@@ -177,7 +178,7 @@ public class Vuelo implements Comparable<Vuelo> {
     public ListaSimple<Pasaje> getPasajesEcon() {
         return pasajesEcon;
     }
-    
+
     public void setPasajesEcon(ListaSimple<Pasaje> pasajesEcon) {
         this.pasajesEcon = pasajesEcon;
     }

@@ -95,10 +95,7 @@ public class ListaSimple<T extends Comparable<T>> implements IListaSimple<T> {
         while (nodoAux != null) {
             aux += nodoAux.getDato().toString();
             if (nodoAux.getSiguiente() != null) {
-                aux += "|";
                 aux += "\n";
-            } else {
-                aux += "|";
             }
             nodoAux = nodoAux.getSiguiente();
         }
