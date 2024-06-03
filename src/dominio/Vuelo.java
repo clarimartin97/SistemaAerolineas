@@ -134,8 +134,6 @@ public class Vuelo implements Comparable<Vuelo> {
     public int compareTo(Vuelo o) {
         return this.getCodAvion().compareTo(o.getCodAvion());
     }
-
-<<<<<<< HEAD
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -147,7 +145,7 @@ public class Vuelo implements Comparable<Vuelo> {
         Vuelo vuelo = (Vuelo) obj;
         return codAvion.equals(vuelo.codAvion);
     }
-=======
+
 
     public int getNumeroCompradosPrim() {
         return numeroCompradosPrim;
@@ -183,6 +181,4 @@ public class Vuelo implements Comparable<Vuelo> {
     public void setPasajesEcon(ListaSimple<Pasaje> pasajesEcon) {
         this.pasajesEcon = pasajesEcon;
     }
-
->>>>>>> 9975ceefaa6c3edf5152e3458143085fd7db329e
 }
