@@ -234,38 +234,38 @@ public class IObligatorioTest {
 //        r = miSistema.listarAvionesDeAerolinea("Aerolineas Argentinas");
 //        assertEquals("", r.valorString);
 //    }
-// @Test
-//    public void testRegistrarClienteOK() {
-//        Retorno r = miSistema.crearSistemaDeGestion();
-//        assertEquals(Retorno.ok().resultado, r.resultado);
-//
-//        r = miSistema.registrarCliente("ABC1234", "Juan Perez", 30);
-//        assertEquals(Retorno.ok().resultado, r.resultado);
-//
-//        r = miSistema.registrarCliente("DEF5678", "Maria Gomez", 25);
-//        assertEquals(Retorno.ok().resultado, r.resultado);
-//    }
-//
-//    @Test
-//    public void testRegistrarClienteERROR1() {
-//        Retorno r = miSistema.crearSistemaDeGestion();
-//        assertEquals(Retorno.ok().resultado, r.resultado);
-//
-//        r = miSistema.registrarCliente("GHI9012", "Carlos Lopez", -5);
-//        assertEquals(Retorno.error1().resultado, r.resultado);
-//    }
-//
-//    @Test
-//    public void testRegistrarClienteERROR2() {
-//        Retorno r = miSistema.crearSistemaDeGestion();
-//        assertEquals(Retorno.ok().resultado, r.resultado);
-//
-//        r = miSistema.registrarCliente("JKL345", "Ana Fernandez", 20);
-//        assertEquals(Retorno.error2().resultado, r.resultado);
-//
-//        r = miSistema.registrarCliente("MNOPQRS1", "Pedro Martinez", 40);
-//        assertEquals(Retorno.error2().resultado, r.resultado);
-//    }
+ @Test
+    public void testRegistrarClienteOK() {
+        Retorno r = miSistema.crearSistemaDeGestion();
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.registrarCliente("ABC1234", "Juan Perez", 30);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.registrarCliente("DEF5678", "Maria Gomez", 25);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+    }
+
+    @Test
+    public void testRegistrarClienteERROR1() {
+        Retorno r = miSistema.crearSistemaDeGestion();
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.registrarCliente("GHI9012", "Carlos Lopez", -5);
+        assertEquals(Retorno.error1().resultado, r.resultado);
+    }
+
+    @Test
+    public void testRegistrarClienteERROR2() {
+        Retorno r = miSistema.crearSistemaDeGestion();
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.registrarCliente("JKL345", "Ana Fernandez", 20);
+        assertEquals(Retorno.error2().resultado, r.resultado);
+
+        r = miSistema.registrarCliente("MNOPQRS1", "Pedro Martinez", 40);
+        assertEquals(Retorno.error2().resultado, r.resultado);
+    }
 
 //    @Test
 //    public void testRegistrarClienteERROR3() {
@@ -300,14 +300,52 @@ public class IObligatorioTest {
         r = miSistema.crearVuelo("QF001", "Qantas", "QF345", "Australia", 2, 1, 2024, 21, 3);
         assertEquals(Retorno.error1().resultado, r.resultado);
     }
+<<<<<<< HEAD
 
 //    @Test
 //    public void testCrearVueloErrorAerolíneaNoExistente() {
 //        Retorno r = miSistema.crearVuelo("EK123", "NoExistente", "EK001", "USA", 1, 1, 2025, 297, 3);
+=======
+//
+//    @Test
+//    public void testComprarPasajeOK() {
+//        Retorno r = miSistema.crearSistemaDeGestion();
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//        
+//        r = miSistema.crearAerolinea("Qantas", "Australia", 7);
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//        
+//        r = miSistema.registrarAvion("QF345", 15, "Qantas");
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//        
+//        r = miSistema.registrarCliente("ABC1234", "Juan Perez", 30);
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//
+//        // Asumiendo que el vuelo AA001 tiene capacidad suficiente para pasajes de primera clase y económica
+//        r = miSistema.comprarPasaje("ABC1234", "QF345", 1); // Comprar pasaje de primera clase
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//
+//        r = miSistema.comprarPasaje("ABC1234", "QF345", 2); // Comprar pasaje de clase económica
+//        assertEquals(Retorno.ok().resultado, r.resultado);
+//    }
+////
+//    @Test
+//    public void testComprarPasajeERROR1() {
+//        // Intentar comprar un pasaje para un cliente que no existe
+//        Retorno r = miSistema.comprarPasaje("87654321", "AA001", 1);
+//        assertEquals(Retorno.error1().resultado, r.resultado);
+//    }
+//
+//    @Test
+//    public void testComprarPasajeERROR2() {
+//        // Intentar comprar un pasaje para un vuelo que no existe
+//        Retorno r = miSistema.comprarPasaje("12345678", "AA999", 1);
+>>>>>>> 9975ceefaa6c3edf5152e3458143085fd7db329e
 //        assertEquals(Retorno.error2().resultado, r.resultado);
 //    }
 //
 //    @Test
+<<<<<<< HEAD
 //    public void testCrearVueloErrorAvionNoExistenteEnAerolínea() {
 //        Retorno r = miSistema.crearVuelo("QF124", "Qantas", "EK001", "USA", 1, 1, 2025, 297, 3);
 //        assertEquals(Retorno.error3().resultado, r.resultado);
@@ -331,4 +369,27 @@ public class IObligatorioTest {
 //        Retorno r = miSistema.crearVuelo("QF128", "Qantas", "QF001", "USA", 1, 1, 2025, 298, 100);
 //        assertEquals(Retorno.error5().resultado, r.resultado);
 //    }
+=======
+//    public void testComprarPasajeCategoria1Lleno() {
+//        // Comprar todos los pasajes de primera clase (asumiendo 6 asientos disponibles)
+//        for (int i = 0; i < 6; i++) {
+//            miSistema.comprarPasaje("12345678", "AA001", 1);
+//        }
+//        // Intentar comprar un pasaje de primera clase cuando ya están llenos
+//        Retorno r = miSistema.comprarPasaje("12345678", "AA001", 1);
+//        assertEquals(Retorno.ok().resultado, r.resultado); // Debe ir a la cola de espera
+//    }
+//
+//    @Test
+//    public void testComprarPasajeCategoria2Lleno() {
+//        // Comprar todos los pasajes de clase económica (asumiendo 6 asientos disponibles)
+//        for (int i = 0; i < 6; i++) {
+//            miSistema.comprarPasaje("12345678", "AA001", 2);
+//        }
+//        // Intentar comprar un pasaje de clase económica cuando ya están llenos
+//        Retorno r = miSistema.comprarPasaje("12345678", "AA001", 2);
+//        assertEquals(Retorno.ok().resultado, r.resultado); // Debe ir a la cola de espera
+//    }
+
+>>>>>>> 9975ceefaa6c3edf5152e3458143085fd7db329e
 }

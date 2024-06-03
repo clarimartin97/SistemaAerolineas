@@ -2,55 +2,60 @@ package dominio;
 
 public class Pasaje implements Comparable<Pasaje> {
 
-    private Cliente pasaporteCliente;
-    private Vuelo codigoVuelo;
-    private String categoriaPasaje;
+    private Cliente cliente;
+    private Vuelo vuelo;
+    private int categoriaPasaje;
+    private String estado;
 
-    public Pasaje(Cliente pasaporteCliente, Vuelo codigoVuelo, String categoriaPasaje) {
-        this.pasaporteCliente = pasaporteCliente;
-        this.codigoVuelo = codigoVuelo;
+    public Pasaje(Cliente cliente, Vuelo codigoVuelo, int categoriaPasaje, String estado) {
+        this.cliente = cliente;
+        this.vuelo = vuelo;
         this.categoriaPasaje = categoriaPasaje;
+        this.estado = estado;
     }
 
-    /**
-     * @return the pasaporteCliente
-     */
-    public Cliente getPasaporteCliente() {
-        return pasaporteCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    /**
-     * @param pasaporteCliente the pasaporteCliente to set
-     */
-    public void setPasaporteCliente(Cliente pasaporteCliente) {
-        this.pasaporteCliente = pasaporteCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    /**
-     * @return the codigoVuelo
-     */
-    public Vuelo getCodigoVuelo() {
-        return codigoVuelo;
+    public Vuelo getVuelo() {
+        return vuelo;
     }
 
-    /**
-     * @param codigoVuelo the codigoVuelo to set
-     */
-    public void setCodigoVuelo(Vuelo codigoVuelo) {
-        this.codigoVuelo = codigoVuelo;
+    public void setVuelo(Vuelo Vuelo) {
+        this.vuelo = Vuelo;
     }
 
-    public String getCategoriaPasaje() {
+    public int getCategoriaPasaje() {
         return categoriaPasaje;
     }
 
-    public void setCategoriaPasaje(String categoriaPasaje) {
+    public void setCategoriaPasaje(int categoriaPasaje) {
         this.categoriaPasaje = categoriaPasaje;
     }
+ 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    public String toString() {
+        return this.cliente.getPasaporte() + "-" + this.getVuelo();
+
+    }
+
 
     @Override
     public int compareTo(Pasaje o) {
-        return this.getCategoriaPasaje().compareTo(o.getCategoriaPasaje());
+        return this.getCliente().compareTo(o.getCliente());
     }
 
+   
 }

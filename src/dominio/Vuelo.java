@@ -2,6 +2,7 @@ package dominio;
 
 import tads.Cola;
 import tads.ListaSimple;
+import tads.Matriz;
 
 public class Vuelo implements Comparable<Vuelo> {
 
@@ -14,7 +15,10 @@ public class Vuelo implements Comparable<Vuelo> {
     private int anio;
     private int cantPasajesEcon;
     private int cantPasajesPClase;
-    private ListaSimple<Pasaje> pasajesComprados;
+    private ListaSimple<Pasaje> pasajesPrim;
+    private int numeroCompradosPrim;
+    private ListaSimple<Pasaje> pasajesEcon;
+    private int numeroCompradosEcon;
     private Cola<Pasaje> colaEsperaPrimera;
     private Cola<Pasaje> colaEsperaEconomica;
 
@@ -29,7 +33,10 @@ public class Vuelo implements Comparable<Vuelo> {
         this.setAnio(_anio);
         this.setCantPasajesEcon(_cantPasajesEcon);
         this.setCantPasajesPClase(_cantPasajesPClase);
-        this.pasajesComprados = new ListaSimple<>();
+        this.pasajesPrim = new ListaSimple<Pasaje>();
+        this.numeroCompradosPrim = 0;
+        this.pasajesEcon = new ListaSimple<Pasaje>();
+        this.numeroCompradosEcon = 0;
         this.colaEsperaPrimera = new Cola<>();
         this.colaEsperaEconomica = new Cola<>();
 
@@ -43,30 +50,18 @@ public class Vuelo implements Comparable<Vuelo> {
         this.codigoVuelo = codigoVuelo;
     }
 
-    /**
-     * @return the aerolinea
-     */
     public Aerolinea getAerolinea() {
         return aerolinea;
     }
 
-    /**
-     * @param aerolinea the aerolinea to set
-     */
     public void setAerolinea(Aerolinea aerolinea) {
         this.aerolinea = aerolinea;
     }
 
-    /**
-     * @return the codAvion
-     */
     public Avion getCodAvion() {
         return codAvion;
     }
 
-    /**
-     * @param codAvion the codAvion to set
-     */
     public void setCodAvion(Avion codAvion) {
         this.codAvion = codAvion;
     }
@@ -119,11 +114,28 @@ public class Vuelo implements Comparable<Vuelo> {
         this.cantPasajesPClase = cantPasajesPClase;
     }
 
+    public Cola<Pasaje> getColaEsperaPrimera() {
+        return colaEsperaPrimera;
+    }
+
+    public void setColaEsperaPrimera(Cola<Pasaje> colaEsperaPrimera) {
+        this.colaEsperaPrimera = colaEsperaPrimera;
+    }
+
+    public Cola<Pasaje> getColaEsperaEconomica() {
+        return colaEsperaEconomica;
+    }
+
+    public void setColaEsperaEconomica(Cola<Pasaje> colaEsperaEconomica) {
+        this.colaEsperaEconomica = colaEsperaEconomica;
+    }
+
     @Override
     public int compareTo(Vuelo o) {
         return this.getCodAvion().compareTo(o.getCodAvion());
     }
 
+<<<<<<< HEAD
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -135,4 +147,42 @@ public class Vuelo implements Comparable<Vuelo> {
         Vuelo vuelo = (Vuelo) obj;
         return codAvion.equals(vuelo.codAvion);
     }
+=======
+
+    public int getNumeroCompradosPrim() {
+        return numeroCompradosPrim;
+    }
+
+    public void setNumeroCompradosPrim(int numeroCompradosPrim) {
+        this.numeroCompradosPrim = numeroCompradosPrim;
+    }
+
+
+    public int getNumeroCompradosEcon() {
+        return numeroCompradosEcon;
+    }
+
+    public void setNumeroCompradosEcon(int numeroCompradosEcon) {
+        this.numeroCompradosEcon = numeroCompradosEcon;
+    }
+
+
+    public ListaSimple<Pasaje> getPasajesPrim() {
+        return pasajesPrim;
+    }
+
+
+    public void setPasajesPrim(ListaSimple<Pasaje> pasajesPrim) {
+        this.pasajesPrim = pasajesPrim;
+    }
+
+    public ListaSimple<Pasaje> getPasajesEcon() {
+        return pasajesEcon;
+    }
+    
+    public void setPasajesEcon(ListaSimple<Pasaje> pasajesEcon) {
+        this.pasajesEcon = pasajesEcon;
+    }
+
+>>>>>>> 9975ceefaa6c3edf5152e3458143085fd7db329e
 }

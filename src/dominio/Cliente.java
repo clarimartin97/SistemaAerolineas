@@ -42,8 +42,16 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public String toString() {
-        return this.getNombre() + "-" + this.getPasaporte() + "-" + getEdad();
+        return this.getPasaporte() + "-" + this.getNombre() + "-" + getEdad()+"|";
 
+    }
+
+    public ListaSimple<Pasaje> getPasajesCompradosDevueltos() {
+        return pasajesCompradosDevueltos;
+    }
+
+    public void setPasajesCompradosDevueltos(ListaSimple<Pasaje> pasajesCompradosDevueltos) {
+        this.pasajesCompradosDevueltos = pasajesCompradosDevueltos;
     }
 
     @Override
@@ -65,4 +73,5 @@ public class Cliente implements Comparable<Cliente> {
     }
     
 
+ 
 }

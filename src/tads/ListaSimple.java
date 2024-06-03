@@ -89,14 +89,20 @@ public class ListaSimple<T extends Comparable<T>> implements IListaSimple<T> {
     }
 
     @Override
-    public void mostrar() {
-        Nodo<T> aux = getInicio();
-
-        while (aux != null) {
-            System.out.print(aux.getDato() + " ");
-            aux = aux.getSiguiente();
+    public String mostrar() {
+        Nodo<T> nodoAux = inicio;
+        String aux = "";
+        while (nodoAux != null) {
+            aux += nodoAux.getDato().toString();
+            if (nodoAux.getSiguiente() != null) {
+                aux += "|";
+                aux += "\n";
+            } else {
+                aux += "|";
+            }
+            nodoAux = nodoAux.getSiguiente();
         }
-        System.out.println();
+        return aux;
     }
 
     @Override
@@ -170,18 +176,10 @@ public class ListaSimple<T extends Comparable<T>> implements IListaSimple<T> {
 
     @Override
     public String mostrarREC(Nodo nodoAux) {
-        String aux = "";
-        while (nodoAux != null) {
-            aux += nodoAux.getDato().toString();
-            if (nodoAux.getSiguiente() != null) {
-                aux += "|";
-                aux += "\n";
-            } else {
-                aux += "|";
-            }
-            nodoAux = nodoAux.getSiguiente();
+        if (nodoAux == null) {
+            return "";
         }
-        return aux;
+        return nodoAux.getDato().toString() + "\n" + mostrarREC(nodoAux.getSiguiente());
     }
 
     public String mostrarREC() {
