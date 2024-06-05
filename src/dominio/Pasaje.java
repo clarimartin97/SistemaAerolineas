@@ -7,9 +7,9 @@ public class Pasaje implements Comparable<Pasaje> {
     private int categoriaPasaje;
     private String estado;
 
-    public Pasaje(Cliente cliente, Vuelo codigoVuelo, int categoriaPasaje, String estado) {
+    public Pasaje(Cliente cliente, Vuelo Vuelo, int categoriaPasaje, String estado) {
         this.cliente = cliente;
-        this.vuelo = vuelo;
+        this.vuelo = Vuelo;
         this.categoriaPasaje = categoriaPasaje;
         this.estado = estado;
     }
@@ -37,7 +37,7 @@ public class Pasaje implements Comparable<Pasaje> {
     public void setCategoriaPasaje(int categoriaPasaje) {
         this.categoriaPasaje = categoriaPasaje;
     }
- 
+
     public String getEstado() {
         return estado;
     }
@@ -45,17 +45,27 @@ public class Pasaje implements Comparable<Pasaje> {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     public String toString() {
-        return this.cliente.getPasaporte() + "-" + this.getVuelo();
+        return this.cliente.getPasaporte() + "-" + this.vuelo.getCodigoVuelo() + "|";
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pasaje pasaje = (Pasaje) o;
+        return cliente.equals(pasaje.cliente);
+    }
 
     @Override
     public int compareTo(Pasaje o) {
         return this.getCliente().compareTo(o.getCliente());
     }
 
-   
 }

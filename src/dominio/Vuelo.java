@@ -148,7 +148,7 @@ public class Vuelo implements Comparable<Vuelo> {
             return false;
         }
         Vuelo vuelo = (Vuelo) obj;
-        return codAvion.equals(vuelo.codAvion);
+        return codigoVuelo.equals(vuelo.codigoVuelo);
     }
 
     public int getNumeroCompradosPrim() {

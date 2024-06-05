@@ -125,7 +125,6 @@ public class Sistema implements IObligatorio {
     public Retorno crearVuelo(String codigoVuelo, String aerolinea, String codAvion, String paisDestino, int dia,
             int mes, int anio, int cantPasajesEcon, int cantPasajesPClase) {
 
-        
         Nodo<Aerolinea> nodoAerolinea = aerolineas.obtenerElemento(new Aerolinea(aerolinea, "", 0));
         Nodo<Avion> nodoAvion = nodoAerolinea.getDato().getAviones()
                 .obtenerElemento(new Avion(codAvion, 0, nodoAerolinea.getDato()));
@@ -135,7 +134,6 @@ public class Sistema implements IObligatorio {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
 
-   
         Nodo<Aerolinea> nodoAerolinea2 = aerolineas.obtenerElemento(new Aerolinea(aerolinea, "", 0));
         if (nodoAerolinea2 == null) {
             return new Retorno(Retorno.Resultado.ERROR_2);
@@ -144,8 +142,8 @@ public class Sistema implements IObligatorio {
         Nodo<Vuelo> auxVuelo = vuelos.getInicio();
         while (auxVuelo != null) {
             Vuelo vuelo = auxVuelo.getDato();
-            if (vuelo.getCodAvion().equals(nodoAvion.getDato()) && vuelo.getDia() == dia &&
-                    vuelo.getMes() == mes
+            if (vuelo.getCodAvion().equals(nodoAvion.getDato()) && vuelo.getDia() == dia
+                    && vuelo.getMes() == mes
                     && vuelo.getAnio() == anio) {
                 return new Retorno(Retorno.Resultado.ERROR_3);
             }
@@ -211,8 +209,6 @@ public class Sistema implements IObligatorio {
         return new Retorno(Retorno.Resultado.OK);
     }
 
-    // falta chequear si el pasaje ya se encuentra en la matriz
-    // agregar a todas las listas necesarias
     @Override
     public Retorno devolverPasaje(String pasaporteCliente, String codigoVuelo) {
         Nodo<Cliente> nodoCliente = clientes.obtenerElemento(new Cliente("", pasaporteCliente, 0));
@@ -230,7 +226,7 @@ public class Sistema implements IObligatorio {
         }
         nodoPasaje.getDato().setEstado("Dev");
         nodoVuelo.getDato().getAerolinea().getPasajesDevueltos().agregarInicio(nodoPasaje.getDato()); // Agrego lista
-                                                                                                      // Aerolinea
+        // Aerolinea
 
         if (nodoPasaje.getDato().getCategoriaPasaje() == 1) {
             nodoVuelo.getDato().getPasajesPrim().borrarElemento(nodoPasaje.getDato());
@@ -293,7 +289,15 @@ public class Sistema implements IObligatorio {
 
     @Override
     public Retorno vuelosDeCliente(String pasaporte) {
-        return Retorno.noImplementada();
+        Retorno r = new Retorno(Retorno.Resultado.OK);
+        Nodo<Cliente> nodoCliente = clientes.obtenerElemento(new Cliente("", pasaporte, 0));
+        if (nodoCliente == null) {
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+
+        r.valorString = listarVuelosClienteRec(nodoCliente.getDato().getPasajesCompradosDevueltos().getInicio());
+        return r;
+
     }
 
     @Override
@@ -314,4 +318,13 @@ public class Sistema implements IObligatorio {
         return Retorno.noImplementada();
     }
 
+    @Override
+    public String listarVuelosClienteRec(Nodo<Pasaje> pasajeAux) {
+        if (pasajeAux == null) {
+            return "";
+        }
+        return pasajeAux.getDato().getVuelo().getCodigoVuelo() + "-" + pasajeAux.getDato().getEstado() + "|" + "\n" + listarVuelosClienteRec(pasajeAux.getSiguiente());
+    }
 }
+
+

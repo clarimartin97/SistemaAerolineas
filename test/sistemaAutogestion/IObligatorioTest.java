@@ -425,5 +425,45 @@ public class IObligatorioTest {
 //        assertEquals("QF1234-Qantas-QF001-Sydney-01/01/2024-66-51|\nEK5678-Emirates-EK123-Dubai-02/01/2024-69-99|", r.valorString);
 //
 //    }
+    @Test
+    public void testPasajesDevueltos() {
+        // Crear aerolíneas
+        Retorno r = miSistema.crearAerolinea("Qantas", "Australia", 201);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.crearAerolinea("Emirates", "Emiratos Árabes Unidos", 336);
+        assertEquals(Retorno.ok().resultado, r.resultado);
 
+        // Registrar aviones
+        r = miSistema.registrarAvion("QF001", 150, "Qantas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarAvion("EK123", 300, "Emirates");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        // Crear vuelos
+        r = miSistema.crearVuelo("QF1234", "Qantas", "QF001", "Sydney", 1, 1, 2024, 66, 51);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.crearVuelo("EK5678", "Emirates", "EK123", "Dubai", 2, 1, 2024, 69, 99);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.registrarCliente("Laura Ortiz", "TUV6789", 35);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        // Comprar y devolver pasajes
+        r = miSistema.comprarPasaje("TUV6789", "QF1234", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.devolverPasaje("TUV6789", "QF1234");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.comprarPasaje("TUV6789", "EK5678", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        // Verificar pasajes devueltos
+        r = miSistema.pasajesDevueltos("Qantas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        assertEquals("TUV6789-QF1234|", r.valorString);
+
+        r = miSistema.vuelosDeCliente("TUV6789");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        assertEquals("EK5678-Dev|\n", r.valorString);
+    }
 }

@@ -1,5 +1,8 @@
 package sistemaAutogestion;
 
+import dominio.Pasaje;
+import tads.Nodo;
+
 public interface IObligatorio {
     /*
     **************** REGISTROS **************************************
@@ -95,4 +98,6 @@ public interface IObligatorio {
     // Pre: 
     // Post: 
     public Retorno vistaDeVuelo(String codigoVuelo);
+    
+    public String listarVuelosClienteRec(Nodo<Pasaje> pasajeAux);
 }
