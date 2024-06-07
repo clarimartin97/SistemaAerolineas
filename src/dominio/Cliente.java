@@ -9,7 +9,7 @@ public class Cliente implements Comparable<Cliente> {
     private int edad;
     private ListaSimple<Pasaje> pasajesCompradosDevueltos;
 
-    public Cliente(String _nombre, String _pasaporte, int _edad) {
+    public Cliente(String _pasaporte,String _nombre, int _edad) {
         this.setNombre(_nombre);
         this.setPasaporte(_pasaporte);
         this.setEdad(edad);

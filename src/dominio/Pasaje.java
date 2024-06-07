@@ -60,12 +60,16 @@ public class Pasaje implements Comparable<Pasaje> {
             return false;
         }
         Pasaje pasaje = (Pasaje) o;
-        return cliente.equals(pasaje.cliente);
+        return cliente.getPasaporte().equals(pasaje.cliente.getPasaporte())&&vuelo.getCodigoVuelo().equals(pasaje.vuelo.getCodigoVuelo());
     }
 
     @Override
     public int compareTo(Pasaje o) {
-        return this.getCliente().compareTo(o.getCliente());
+        int comparacionCliente = this.cliente.getPasaporte().compareTo(o.cliente.getPasaporte());
+        if (comparacionCliente != 0) {
+            return comparacionCliente;
+        }
+        return this.vuelo.getCodigoVuelo().compareTo(o.vuelo.getCodigoVuelo());
     }
 
 }
