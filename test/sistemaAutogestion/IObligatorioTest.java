@@ -592,9 +592,9 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
         //Creación de vuelos
         r = miSistema.crearVuelo("AA1111", "Aerolineas Argentinas", "FLY221", "Uruguay", 10, 12, 2024, 12, 2);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.crearVuelo("AA2341", "Aerolineas Argentinas", "FLY300", "Brasil", 1, 11, 2024, 6, 3);
         assertEquals(Retorno.error5().resultado, r.resultado);
+        r = miSistema.crearVuelo("AA2341", "Aerolineas Argentinas", "FLY300", "Brasil", 1, 11, 2024, 6, 3);
+        assertEquals(Retorno.ok().resultado, r.resultado);
     }
     
      @Test
