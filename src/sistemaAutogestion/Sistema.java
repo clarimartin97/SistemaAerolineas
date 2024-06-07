@@ -132,15 +132,17 @@ public class Sistema implements IObligatorio {
 
         Nodo<Avion> nodoAvion = nodoAerolinea.getDato().getAviones()
                 .obtenerElemento(new Avion(codAvion, 0, nodoAerolinea.getDato()));
+        
+        if (nodoAvion == null) {
+            return new Retorno(Retorno.Resultado.ERROR_3);
+        }
 
         if (vuelos.obtenerElemento(new Vuelo(codigoVuelo, nodoAerolinea.getDato(), nodoAvion.getDato(), paisDestino,
                 dia, mes, anio, cantPasajesEcon, cantPasajesPClase)) != null) {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
 
-        if (!nodoAerolinea.getDato().getAviones().estaElemento(nodoAvion.getDato())) {
-            return new Retorno(Retorno.Resultado.ERROR_3);
-        }
+        
 
         Nodo<Vuelo> auxVuelo = vuelos.getInicio();
         while (auxVuelo != null) {
