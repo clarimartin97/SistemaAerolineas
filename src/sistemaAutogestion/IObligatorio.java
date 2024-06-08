@@ -4,7 +4,6 @@ import dominio.Pasaje;
 import tads.Nodo;
 
 public interface IObligatorio {
-
     /*
     **************** REGISTROS **************************************
      */
@@ -99,15 +98,6 @@ public interface IObligatorio {
     // Pre: 
     // Post: 
     public Retorno vistaDeVuelo(String codigoVuelo);
-
-    //Metodos Auxiliares:
+    
     public String listarVuelosClienteRec(Nodo<Pasaje> pasajeAux);
-
-    public Retorno pasajesPrimera(String codigoVuelo);
-
-    public Retorno pasajesEcon(String codigoVuelo);
-
-    public Retorno colaPrimera(String codigoVuelo);
-
-    public Retorno colaEcon(String codigoVuelo);
 }
