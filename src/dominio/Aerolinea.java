@@ -63,8 +63,7 @@ public class Aerolinea implements Comparable<Aerolinea> {
     }
 
     public String toString() {
-        return this.getNombre() + "-" + this.getPais() + "-" + getCantMaxAviones()+"|";
-
+        return this.getNombre();
     }
 
     @Override

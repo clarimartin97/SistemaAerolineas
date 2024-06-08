@@ -117,7 +117,7 @@ public class Sistema implements IObligatorio {
         if (nodoExistente != null) {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
-        clientes.agregarOrd(cliente);
+        clientes.agregarInicio(cliente);
         return new Retorno(Retorno.Resultado.OK);
     }
 
@@ -231,7 +231,7 @@ public class Sistema implements IObligatorio {
         }
 
         Pasaje nuevoPasaje = new Pasaje(nodoCliente.getDato(), nodoVuelo.getDato(), nodoPasaje.getDato().getCategoriaPasaje(), "DEV");
-        
+
         nodoCliente.getDato().getPasajesCompradosDevueltos().agregarFinal(nuevoPasaje); // Agrego lista Cliente
         nodoVuelo.getDato().getAerolinea().getPasajesDevueltos().agregarFinal(nodoPasaje.getDato()); // Agrego lista
         // Aerolinea
@@ -333,7 +333,25 @@ public class Sistema implements IObligatorio {
 
     @Override
     public Retorno vistaDeVuelo(String codigoVuelo) {
-        return Retorno.noImplementada();
+        Retorno r = new Retorno(Retorno.Resultado.OK);
+        Nodo<Vuelo> nodoVuelo = vuelos.obtenerElemento(new Vuelo(codigoVuelo, null, null, "", 0, 0, 0, 0, 0));
+
+        Matriz matrizPrim = new Matriz(nodoVuelo.getDato().getCantPasajesPClase() / 3, 3);
+        Matriz matrizEcon = new Matriz(nodoVuelo.getDato().getCantPasajesEcon() / 3, 3);
+
+        Nodo<Pasaje> nodoPasajePrim = nodoVuelo.getDato().getPasajesPrim().getInicio();
+        while (nodoPasajePrim != null) {
+            matrizPrim.agregarValor(nodoPasajePrim.getDato().getCliente().getPasaporte());
+            nodoPasajePrim = nodoPasajePrim.getSiguiente();
+        }
+
+        Nodo<Pasaje> nodoPasajeEcon = nodoVuelo.getDato().getPasajesEcon().getInicio();
+        while (nodoPasajeEcon != null) {
+            matrizEcon.agregarValor(nodoPasajeEcon.getDato().getCliente().getPasaporte());
+            nodoPasajeEcon = nodoPasajeEcon.getSiguiente();
+        }
+        r.valorString = "***********************************\n*** PRIMERA *** " + matrizPrim.mostrarMatriz(matrizPrim) + "***********************************\n*** Economica *** " + matrizEcon.mostrarMatriz(matrizEcon);
+        return r;
     }
 
 }
