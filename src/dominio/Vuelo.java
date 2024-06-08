@@ -8,7 +8,7 @@ public class Vuelo implements Comparable<Vuelo> {
 
     private String codigoVuelo;
     private Aerolinea aerolinea;
-    private Avion codAvion;
+    private Avion Avion;
     private String paisDestino;
     private int dia;
     private int mes;
@@ -22,11 +22,11 @@ public class Vuelo implements Comparable<Vuelo> {
     private Cola<Pasaje> colaEsperaPrimera;
     private Cola<Pasaje> colaEsperaEconomica;
 
-    public Vuelo(String _codigoVuelo, Aerolinea _aerolinea, Avion _codAvion, String _paisDestino,
+    public Vuelo(String _codigoVuelo, Aerolinea _aerolinea, Avion _Avion, String _paisDestino,
             int _dia, int _mes, int _anio, int _cantPasajesEcon, int _cantPasajesPClase) {
         this.setCodigoVuelo(_codigoVuelo);
         this.setAerolinea(_aerolinea);
-        this.setCodAvion(_codAvion);
+        this.setAvion(_Avion);
         this.setPaisDestino(_paisDestino);
         this.setDia(_dia);
         this.setMes(_mes);
@@ -58,12 +58,12 @@ public class Vuelo implements Comparable<Vuelo> {
         this.aerolinea = aerolinea;
     }
 
-    public Avion getCodAvion() {
-        return codAvion;
+    public Avion getAvion() {
+        return Avion;
     }
 
-    public void setCodAvion(Avion codAvion) {
-        this.codAvion = codAvion;
+    public void setAvion(Avion codAvion) {
+        this.Avion = codAvion;
     }
 
     public String getPaisDestino() {
@@ -132,12 +132,12 @@ public class Vuelo implements Comparable<Vuelo> {
 
     @Override
     public String toString() {
-        return this.getCodigoVuelo() + "-" + this.getAerolinea().getNombre() + "-" + this.getCodAvion() + "-" + this.getNumeroCompradosEcon() + "-" + this.getNumeroCompradosPrim() + "-" + this.getCantPasajesEcon() + "-" + this.getCantPasajesPClase() + "|";
+        return this.getCodigoVuelo() + "-" + this.getAerolinea().getNombre() + "-" + this.getAvion().getCodigo() + "-" + this.getNumeroCompradosEcon() + "-" + this.getNumeroCompradosPrim() + "-" + (this.getCantPasajesEcon() + this.getCantPasajesPClase() - (this.getNumeroCompradosEcon() + this.getNumeroCompradosPrim())) + "|";
     }
 
     @Override
     public int compareTo(Vuelo o) {
-        return this.getCodAvion().compareTo(o.getCodAvion());
+        return this.getAvion().getCodigo().compareTo(o.getAvion().getCodigo());
     }
 
     @Override

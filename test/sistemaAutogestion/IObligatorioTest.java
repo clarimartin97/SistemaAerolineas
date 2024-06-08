@@ -189,7 +189,6 @@ public class IObligatorioTest {
 
     }
 
-
     @Test
     public void testListarAerolineas() {
         Retorno r = miSistema.crearAerolinea("Ethiopian Airlines", "Etiopía", 15);
@@ -282,7 +281,6 @@ public class IObligatorioTest {
     }
 
 //    ///////////////////////////////////////////////////////////////// creado por nos
-
     @Test
     public void testRegistrarClienteERROR3() {
         Retorno r = miSistema.crearSistemaDeGestion();
@@ -291,10 +289,11 @@ public class IObligatorioTest {
         r = miSistema.registrarCliente("TUV6789", "Laura Ortiz", 35);
         assertEquals(Retorno.ok().resultado, r.resultado);
 
-        r = miSistema.registrarCliente("TUV6789","Sofia Gonzalez",  28);
+        r = miSistema.registrarCliente("TUV6789", "Sofia Gonzalez", 28);
         assertEquals(Retorno.error3().resultado, r.resultado);
     }
 //
+
     @Test
     public void testCrearClienteOK() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
@@ -307,7 +306,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error3().resultado, r.resultado);
     }
 
-
     @Test
     public void testListarClienteOK() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
@@ -318,7 +316,7 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
 
         r = miSistema.listarClientes();
-        assertEquals("CB34555-Camila Barcos-54|\nAM11111-Alfonso Miguez-34|\nMF34111-Martina Fernandez-1|",
+        assertEquals("CB34555-Camila Barcos-54|\nAM11111-Alfonso Miguez-34|\nMF34111-Martina Fernandez-1|\n",
                 r.valorString);
     }
 
@@ -451,7 +449,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error6().resultado, r.resultado);
     }
 
-
     @Test
     public void testListarVuelosOK() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
@@ -469,13 +466,16 @@ public class IObligatorioTest {
         r = miSistema.crearVuelo("AA3333", "Aerolineas Argentinas", "FLY221", "Uruguay", 5, 9, 2024, 3, 12);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.listarVuelos();
-        assertEquals("AA1111-Aerolineas Argentinas-FLY221-12-11-15|\nAA2222-Aerolineas Argentinas-FLY221-12-11-15|\nAA3333-Aerolineas Argentinas-FLY221-12-11-15|", r.valorString);
+        assertEquals("AA1111-Aerolineas Argentinas-FLY221-0-0-15|\nAA2222-Aerolineas Argentinas-FLY221-0-0-15|\nAA3333-Aerolineas Argentinas-FLY221-0-0-15|", r.valorString);
+
+        //Compra de pasajes
         r = miSistema.comprarPasaje("MF34111", "AA1111", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.comprarPasaje("VM32132", "AA2222", 2);
         assertEquals(Retorno.ok().resultado, r.resultado);
+
         r = miSistema.listarVuelos();
-        assertEquals("AA1111-Aerolineas Argentinas-FLY221-1-2-14|\nAA2222-Aerolineas Argentinas-FLY221-1-1-14|\nAA3333-Aerolineas Argentinas-FLY221-3-3-15|", r.valorString);
+        assertEquals("AA1111-Aerolineas Argentinas-FLY221-1-0-14|\nAA2222-Aerolineas Argentinas-FLY221-0-1-14|\nAA3333-Aerolineas Argentinas-FLY221-0-0-15|", r.valorString);
     }
 
     @Test

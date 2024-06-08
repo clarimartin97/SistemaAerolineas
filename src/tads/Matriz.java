@@ -57,7 +57,6 @@ public class Matriz<T> {
             }
             aux += "\n ***********************************\n";
         }
-        System.out.println(aux);
         return aux;
     }
 

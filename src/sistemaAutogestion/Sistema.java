@@ -145,7 +145,7 @@ public class Sistema implements IObligatorio {
         Nodo<Vuelo> auxVuelo = vuelos.getInicio();
         while (auxVuelo != null) {
             Vuelo vuelo = auxVuelo.getDato();
-            if (vuelo.getCodAvion().equals(nodoAvion.getDato()) && vuelo.getDia() == dia
+            if (vuelo.getAvion().equals(nodoAvion.getDato()) && vuelo.getDia() == dia
                     && vuelo.getMes() == mes
                     && vuelo.getAnio() == anio) {
                 return new Retorno(Retorno.Resultado.ERROR_4);
@@ -173,7 +173,7 @@ public class Sistema implements IObligatorio {
                 anio, cantPasajesEcon, cantPasajesPClase);
         nuevoVuelo.setCantPasajesEcon(cantPasajesEcon);
         nuevoVuelo.setCantPasajesPClase(cantPasajesPClase);
-        vuelos.agregarInicio(nuevoVuelo);
+        vuelos.agregarFinal(nuevoVuelo);
         return new Retorno(Retorno.Resultado.OK);
     }
 
@@ -353,8 +353,9 @@ public class Sistema implements IObligatorio {
             matrizEcon.agregarValor(nodoPasajeEcon.getDato().getCliente().getPasaporte());
             nodoPasajeEcon = nodoPasajeEcon.getSiguiente();
         }
-        r.valorString = "***********************************\n*** PRIMERA *** " + matrizPrim.mostrarMatriz(matrizPrim)
-                + "***********************************\n*** Economica *** " + matrizEcon.mostrarMatriz(matrizEcon);
+        r.valorString = "\n  ***********************************\n           *** PRIMERA ***         \n" + matrizPrim.mostrarMatriz(matrizPrim)
+                + "\n           *** Economica ***         \n" + matrizEcon.mostrarMatriz(matrizEcon);
+        System.out.print(r);
         return r;
     }
 
