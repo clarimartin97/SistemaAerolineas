@@ -355,7 +355,7 @@ public class Sistema implements IObligatorio {
         }
         r.valorString = "\n  ***********************************\n           *** PRIMERA ***         \n" + matrizPrim.mostrarMatriz(matrizPrim)
                 + "\n           *** Economica ***         \n" + matrizEcon.mostrarMatriz(matrizEcon);
-        System.out.print(r);
+        System.out.print(r.valorString);
         return r;
     }
 

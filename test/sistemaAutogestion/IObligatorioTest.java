@@ -575,7 +575,17 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
 
         r = miSistema.vistaDeVuelo("AA1111");
-        assertEquals("", r.valorString);
+        assertEquals("\n"
+                + "  ***********************************\n"
+                + "           *** PRIMERA ***         \n"
+                + "*  CM27455  *  ES99231  *  GV99882  *  \n"
+                + " ***********************************\n"
+                + "\n"
+                + "           *** Economica ***         \n"
+                + "*  CM27455  *  ES99231  *  GV99882  *  \n"
+                + " ***********************************\n"
+                + "*  CB34555  *  VM32132  *  MF34111  *  \n"
+                + " ***********************************\n", r.valorString);
 
     }
 
