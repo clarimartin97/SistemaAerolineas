@@ -63,7 +63,7 @@ public class Aerolinea implements Comparable<Aerolinea> {
     }
 
     public String toString() {
-        return this.getNombre();
+        return this.getNombre() + "-" + this.getPais() + "-" + this.getCantMaxAviones()+ "|";
     }
 
     @Override
@@ -80,8 +80,7 @@ public class Aerolinea implements Comparable<Aerolinea> {
 
     @Override
     public int compareTo(Aerolinea o) {
-      return this.nombre.compareToIgnoreCase(o.nombre);
+        return this.nombre.compareToIgnoreCase(o.nombre);
     }
-
 
 }

@@ -173,7 +173,7 @@ public class Sistema implements IObligatorio {
                 anio, cantPasajesEcon, cantPasajesPClase);
         nuevoVuelo.setCantPasajesEcon(cantPasajesEcon);
         nuevoVuelo.setCantPasajesPClase(cantPasajesPClase);
-        vuelos.agregarOrd(nuevoVuelo);
+        vuelos.agregarInicio(nuevoVuelo);
         return new Retorno(Retorno.Resultado.OK);
     }
 
@@ -195,7 +195,8 @@ public class Sistema implements IObligatorio {
             if (nodoVuelo.getDato().getNumeroCompradosPrim() < nodoVuelo.getDato().getCantPasajesPClase()) {
                 nodoVuelo.getDato().getPasajesPrim().agregarInicio(nuevoPasaje); // Agrego lista Vuelo
                 nodoVuelo.getDato().setNumeroCompradosPrim(nodoVuelo.getDato().getNumeroCompradosPrim() + 1);
-                nodoCliente.getDato().getPasajesCompradosDevueltos().agregarInicio(nuevoPasaje); // Agrego en lista Cliente
+                nodoCliente.getDato().getPasajesCompradosDevueltos().agregarInicio(nuevoPasaje); // Agrego en lista
+                                                                                                 // Cliente
 
             } else if (categoríaPasaje == 2) {
 
@@ -230,7 +231,8 @@ public class Sistema implements IObligatorio {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
 
-        Pasaje nuevoPasaje = new Pasaje(nodoCliente.getDato(), nodoVuelo.getDato(), nodoPasaje.getDato().getCategoriaPasaje(), "DEV");
+        Pasaje nuevoPasaje = new Pasaje(nodoCliente.getDato(), nodoVuelo.getDato(),
+                nodoPasaje.getDato().getCategoriaPasaje(), "DEV");
 
         nodoCliente.getDato().getPasajesCompradosDevueltos().agregarFinal(nuevoPasaje); // Agrego lista Cliente
         nodoVuelo.getDato().getAerolinea().getPasajesDevueltos().agregarFinal(nodoPasaje.getDato()); // Agrego lista
@@ -315,7 +317,8 @@ public class Sistema implements IObligatorio {
         if (pasajeAux == null) {
             return "";
         }
-        return pasajeAux.getDato().getVuelo().getCodigoVuelo() + "-" + pasajeAux.getDato().getEstado() + "|" + "\n" + listarVuelosClienteRec(pasajeAux.getSiguiente());
+        return pasajeAux.getDato().getVuelo().getCodigoVuelo() + "-" + pasajeAux.getDato().getEstado() + "|" + "\n"
+                + listarVuelosClienteRec(pasajeAux.getSiguiente());
     }
 
     @Override
@@ -350,7 +353,8 @@ public class Sistema implements IObligatorio {
             matrizEcon.agregarValor(nodoPasajeEcon.getDato().getCliente().getPasaporte());
             nodoPasajeEcon = nodoPasajeEcon.getSiguiente();
         }
-        r.valorString = "***********************************\n*** PRIMERA *** " + matrizPrim.mostrarMatriz(matrizPrim) + "***********************************\n*** Economica *** " + matrizEcon.mostrarMatriz(matrizEcon);
+        r.valorString = "***********************************\n*** PRIMERA *** " + matrizPrim.mostrarMatriz(matrizPrim)
+                + "***********************************\n*** Economica *** " + matrizEcon.mostrarMatriz(matrizEcon);
         return r;
     }
 

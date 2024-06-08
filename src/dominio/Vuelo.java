@@ -129,9 +129,10 @@ public class Vuelo implements Comparable<Vuelo> {
     public void setColaEsperaEconomica(Cola<Pasaje> colaEsperaEconomica) {
         this.colaEsperaEconomica = colaEsperaEconomica;
     }
+
     @Override
     public String toString() {
-        return this.getCodigoVuelo() + "-" + this.getAerolinea() + "-" + this.getCodAvion() + "|" ;
+        return this.getCodigoVuelo() + "-" + this.getAerolinea().getNombre() + "-" + this.getCodAvion() + "-" + this.getNumeroCompradosEcon() + "-" + this.getNumeroCompradosPrim() + "-" + this.getCantPasajesEcon() + "-" + this.getCantPasajesPClase() + "|";
     }
 
     @Override
