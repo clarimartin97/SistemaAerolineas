@@ -37,8 +37,8 @@ public class Vuelo implements Comparable<Vuelo> {
         this.numeroCompradosPrim = 0;
         this.pasajesEcon = new ListaSimple<Pasaje>();
         this.numeroCompradosEcon = 0;
-        this.colaEsperaPrimera = new Cola<>();
-        this.colaEsperaEconomica = new Cola<>();
+        this.colaEsperaPrimera = new Cola<Pasaje>();
+        this.colaEsperaEconomica = new Cola<Pasaje>();
 
     }
 
