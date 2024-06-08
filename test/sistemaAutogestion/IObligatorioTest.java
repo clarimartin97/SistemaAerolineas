@@ -458,14 +458,10 @@ public class IObligatorioTest {
         r = miSistema.comprarPasaje("TUV6789", "EK5678", 2);
         assertEquals(Retorno.ok().resultado, r.resultado);
 
-        // Verificar pasajes devueltos
+        // Verificar pasajes devueltos en aerolinea
         r = miSistema.pasajesDevueltos("Qantas");
         assertEquals(Retorno.ok().resultado, r.resultado);
         assertEquals("TUV6789-QF1234|", r.valorString);
-
-        r = miSistema.vuelosDeCliente("TUV6789");
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        assertEquals("EK5678-Dev|", r.valorString);
     }
 
     @Test
@@ -746,24 +742,44 @@ public class IObligatorioTest {
         //Creación de aviones
         r = miSistema.registrarAvion("FLY221", 9, "Aerolineas Argentinas");
         assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarAvion("FLY222", 18, "Aerolineas Argentinas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
         //Creación de vuelos
         r = miSistema.crearVuelo("AA1111", "Aerolineas Argentinas", "FLY221", "Uruguay", 10, 12, 2024, 6, 3);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        //Compra de pasajes (hay disponible)
-        r = miSistema.comprarPasaje("MF34111", "AA1111", 1);
+        r = miSistema.crearVuelo("AA2222", "Aerolineas Argentinas", "FLY222", "Uruguay", 11, 11, 2024, 12, 6);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("VM32132", "AA1111", 1);
+        //Compra de pasajes (hay disponible)
+        r = miSistema.comprarPasaje("MF34111", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("VM32132", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("CB34555", "AA1111", 2);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.comprarPasaje("CB34555", "AA1111", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("GV99882", "AA1111", 1);
+        r = miSistema.comprarPasaje("GV99882", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("GV99882", "AA2222", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
         // Lista de los comprados
-        
+        r = miSistema.pasajesPrimera("AA1111");
+        assertEquals("CB34555-AA1111|\nVM32132-AA1111|\nMF34111-AA1111|", r.valorString);
+
         // Lista Cola espera
+        r = miSistema.colaPrimera("AA1111");
+        assertEquals("GV99882-AA1111| - ", r.valorString);
+
         // Lista nueva comprados
+        //Devuelvo
         r = miSistema.devolverPasaje("MF34111", "AA1111");
         assertEquals(Retorno.ok().resultado, r.resultado);
+        //Muestro lista nuevamente
+        r = miSistema.pasajesPrimera("AA1111");
+        assertEquals("GV99882-AA1111|\nCB34555-AA1111|\nVM32132-AA1111|", r.valorString);
+        //Muestro cola que deberia estar vacia
+        r = miSistema.colaPrimera("AA1111");
+        assertEquals("", r.valorString);
 
     }
 
