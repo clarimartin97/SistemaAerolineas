@@ -1,50 +1,94 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tads;
 
-/**
- *
- * @author Clara
- */
+import tads.ICola;
+import tads.Nodo;
+
 public class Cola<T extends Comparable<T>> implements ICola<T> {
 
     private Nodo<T> inicio;
     private Nodo<T> fin;
-    private int cantidad;
+    int cantElementos;
+
+    public Cola() {
+        inicio = null;
+        fin = null;
+        cantElementos = 0;
+    }
 
     @Override
-    public void encolar(T n) {
-        Nodo<T> nuevoNodo = new Nodo<>(n);
-        if (esVacia()) {
-            inicio = nuevoNodo;
-        } else {
-            fin.setSiguiente(nuevoNodo);
+    public void encolar(T dato) {
+
+        Nodo nuevo = new Nodo(dato);
+        if (this.esVacia()) {
+            fin = nuevo;
         }
-        fin = nuevoNodo;
-        cantidad++;
+        nuevo.setSiguiente(getInicio());
+        inicio = nuevo;
+        cantElementos++;
+
     }
 
     @Override
     public void desencolar() {
-        if (!esVacia()) {
-            if (inicio == fin) {
-                inicio = null;
+
+        if (!this.esVacia()) {
+
+            if (cantElementos == 1) {
+                inicio = null; //To change body of generated methods, choose Tools | Templates.
+                fin = null;
+                cantElementos = 0;
             } else {
-                inicio = inicio.getSiguiente();
+
+                Nodo actual = getInicio();
+
+                while (actual.getSiguiente() != fin) {
+                    actual = actual.getSiguiente();
+                }
+
+                actual.setSiguiente(null);
+                fin = actual;
+
+                cantElementos--;
             }
-            cantidad--;
         }
     }
 
     @Override
-    public Nodo<T> frente() {
-        return inicio;
-
-    }
-
     public boolean esVacia() {
-        return inicio == null;
+        return getInicio() == null;
     }
+
+    @Override
+    public int cantElementos() {
+        return cantElementos;
+    }
+
+    @Override
+    public T frente() {
+        if (!this.esVacia()) {
+            return inicio.getDato();
+        }
+        return null;
+    }
+
+    @Override
+    public Nodo<T> getInicio() {
+        return inicio;
+    }
+
+    @Override
+    public String mostrarCola() {
+        String aux = "";
+        Nodo mostrar = getInicio();
+
+        while (mostrar != null) {
+
+            aux += (mostrar.getDato() + " - ");
+            mostrar = mostrar.getSiguiente();
+        }
+
+        return aux;
+
+    }
+
 }

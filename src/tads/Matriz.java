@@ -4,7 +4,7 @@
  */
 package tads;
 
-public class Matriz<T> {
+public class Matriz<T>  implements IMatriz<T> {
 
     private T[][] matriz;
     private int filas;

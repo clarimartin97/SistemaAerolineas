@@ -10,9 +10,12 @@ package tads;
  * @param <T>
  */
 public interface ICola<T extends Comparable<T>> {
-
-public void encolar(T n);
-public void desencolar();
-public Nodo<T> frente();
-
+    
+    public void encolar(T dato);
+    public void desencolar() ;  
+    public boolean esVacia(); 
+    public int  cantElementos() ;  
+    public T frente();  
+    public Nodo<T> getInicio();
+    public String mostrarCola();
 }

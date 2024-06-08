@@ -450,6 +450,66 @@ public class IObligatorioTest {
     }
 
     @Test
+    public void testFuncionaColaEsperaOK() {
+        //Creación de clientes
+        Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("VM32132", "Veronida Miguez", 34);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("CB34555", "Camila Barcos", 54);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("GV99882", "Gerardo Vercias", 19);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("ES99231", "Estela Silva", 15);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        //Creación de aerolineas
+        r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        //Creación de aviones
+        r = miSistema.registrarAvion("FLY221", 9, "Aerolineas Argentinas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarAvion("FLY222", 18, "Aerolineas Argentinas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        //Creación de vuelos
+        r = miSistema.crearVuelo("AA1111", "Aerolineas Argentinas", "FLY221", "Uruguay", 10, 12, 2024, 6, 3);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.crearVuelo("AA2222", "Aerolineas Argentinas", "FLY222", "Uruguay", 11, 11, 2024, 12, 6);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        //Compra de pasajes (hay disponible)
+        r = miSistema.comprarPasaje("MF34111", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("VM32132", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("CB34555", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("CB34555", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("GV99882", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("GV99882", "AA2222", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        // Lista de los comprados
+        r = miSistema.pasajesPrimera("AA1111");
+        assertEquals("CB34555-AA1111|\nVM32132-AA1111|\nMF34111-AA1111|", r.valorString);
+
+        // Lista Cola espera
+        r = miSistema.colaPrimera("AA1111");
+        assertEquals("GV99882-AA1111| - ", r.valorString);
+
+        // Lista nueva comprados
+        //Devuelvo
+        r = miSistema.devolverPasaje("MF34111", "AA1111");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        //Muestro lista nuevamente
+        r = miSistema.pasajesPrimera("AA1111");
+        assertEquals("GV99882-AA1111|\nCB34555-AA1111|\nVM32132-AA1111|", r.valorString);
+        //Muestro cola que deberia estar vacia
+        r = miSistema.colaPrimera("AA1111");
+        assertEquals("", r.valorString);
+
+    }
+
+    @Test
     public void testListarVuelosOK() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
@@ -535,59 +595,7 @@ public class IObligatorioTest {
 
     /////////////////////////////////////////////////////////////////// creado por
     /////////////////////////////////////////////////////////////////// nos
-    @Test
-    public void testMostrarVistaVueloOK() {
-        Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.registrarCliente("VM32132", "Veronida Miguez", 34);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.registrarCliente("CB34555", "Camila Barcos", 54);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.registrarCliente("GV99882", "Gerardo Vercias", 19);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.registrarCliente("ES99231", "Estela Silva", 15);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.registrarCliente("CM27455", "Clara Martin", 15);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.registrarAvion("FLY221", 9, "Aerolineas Argentinas");
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.crearVuelo("AA1111", "Aerolineas Argentinas", "FLY221", "Uruguay", 10, 12, 2024, 6, 3);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("MF34111", "AA1111", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("VM32132", "AA1111", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("CB34555", "AA1111", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("GV99882", "AA1111", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("ES99231", "AA1111", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("CM27455", "AA1111", 1);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("GV99882", "AA1111", 2);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("ES99231", "AA1111", 2);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-        r = miSistema.comprarPasaje("CM27455", "AA1111", 2);
-        assertEquals(Retorno.ok().resultado, r.resultado);
-
-        r = miSistema.vistaDeVuelo("AA1111");
-        assertEquals("\n"
-                + "  ***********************************\n"
-                + "           *** PRIMERA ***         \n"
-                + "*  CM27455  *  ES99231  *  GV99882  *  \n"
-                + " ***********************************\n"
-                + "\n"
-                + "           *** Economica ***         \n"
-                + "*  CM27455  *  ES99231  *  GV99882  *  \n"
-                + " ***********************************\n"
-                + "*  CB34555  *  VM32132  *  MF34111  *  \n"
-                + " ***********************************\n", r.valorString);
-
-    }
+ 
 
     @Test
     public void testDevolverPasajeOK() {
@@ -740,10 +748,54 @@ public class IObligatorioTest {
     @Test
     public void testVistaDeVueloOK() {
 
-        /*
-         * Esta prueba no es imprescindible validarla mediante pruebas unitarias,
-         * pudiendo hacer una impresión de pantalla con la vista
-         * del avión, tal como se muestra en la letra del obligatorio
-         */
+        Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("VM32132", "Veronida Miguez", 34);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("CB34555", "Camila Barcos", 54);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("GV99882", "Gerardo Vercias", 19);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("ES99231", "Estela Silva", 15);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarCliente("CM27455", "Clara Martin", 15);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.registrarAvion("FLY221", 9, "Aerolineas Argentinas");
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.crearVuelo("AA1111", "Aerolineas Argentinas", "FLY221", "Uruguay", 10, 12, 2024, 6, 3);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("MF34111", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("VM32132", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("CB34555", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("GV99882", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("ES99231", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("CM27455", "AA1111", 1);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("GV99882", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("ES99231", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+        r = miSistema.comprarPasaje("CM27455", "AA1111", 2);
+        assertEquals(Retorno.ok().resultado, r.resultado);
+
+        r = miSistema.vistaDeVuelo("AA1111");
+        assertEquals("\n"
+                + "  ***********************************\n"
+                + "           *** PRIMERA ***         \n"
+                + "*  CM27455  *  ES99231  *  GV99882  *  \n"
+                + " ***********************************\n"
+                + "\n"
+                + "           *** Economica ***         \n"
+                + "*  CM27455  *  ES99231  *  GV99882  *  \n"
+                + " ***********************************\n"
+                + "*  CB34555  *  VM32132  *  MF34111  *  \n"
+                + " ***********************************\n", r.valorString);
     }
 }
