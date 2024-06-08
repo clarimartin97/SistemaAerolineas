@@ -132,7 +132,7 @@ public class Sistema implements IObligatorio {
 
         Nodo<Avion> nodoAvion = nodoAerolinea.getDato().getAviones()
                 .obtenerElemento(new Avion(codAvion, 0, nodoAerolinea.getDato()));
-        
+
         if (nodoAvion == null) {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
@@ -141,8 +141,6 @@ public class Sistema implements IObligatorio {
                 dia, mes, anio, cantPasajesEcon, cantPasajesPClase)) != null) {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
-
-        
 
         Nodo<Vuelo> auxVuelo = vuelos.getInicio();
         while (auxVuelo != null) {
@@ -193,13 +191,13 @@ public class Sistema implements IObligatorio {
 
         Pasaje nuevoPasaje = new Pasaje(nodoCliente.getDato(), nodoVuelo.getDato(), categoríaPasaje, "CPR");
 
-        if (categoríaPasaje == 1) {
+        if (categoríaPasaje == 2) {
             if (nodoVuelo.getDato().getNumeroCompradosPrim() < nodoVuelo.getDato().getCantPasajesPClase()) {
-                nodoVuelo.getDato().getPasajesPrim().agregarInicio(nuevoPasaje);
+                nodoVuelo.getDato().getPasajesPrim().agregarInicio(nuevoPasaje); // Agrego lista Vuelo
                 nodoVuelo.getDato().setNumeroCompradosPrim(nodoVuelo.getDato().getNumeroCompradosPrim() + 1);
-                nodoCliente.getDato().getPasajesCompradosDevueltos().agregarInicio(nuevoPasaje);
+                nodoCliente.getDato().getPasajesCompradosDevueltos().agregarInicio(nuevoPasaje); // Agrego en lista Cliente
 
-            } else if (categoríaPasaje == 1) {
+            } else if (categoríaPasaje == 2) {
 
                 nodoVuelo.getDato().getColaEsperaPrimera().encolar(nuevoPasaje);
             }
@@ -233,11 +231,12 @@ public class Sistema implements IObligatorio {
         }
 
         Pasaje nuevoPasaje = new Pasaje(nodoCliente.getDato(), nodoVuelo.getDato(), nodoPasaje.getDato().getCategoriaPasaje(), "DEV");
+        
         nodoCliente.getDato().getPasajesCompradosDevueltos().agregarFinal(nuevoPasaje); // Agrego lista Cliente
         nodoVuelo.getDato().getAerolinea().getPasajesDevueltos().agregarFinal(nodoPasaje.getDato()); // Agrego lista
         // Aerolinea
 
-        if (nodoPasaje.getDato().getCategoriaPasaje() == 1) {
+        if (nodoPasaje.getDato().getCategoriaPasaje() == 2) {
             nodoVuelo.getDato().getPasajesPrim().borrarElemento(nodoPasaje.getDato());
             nodoVuelo.getDato().setNumeroCompradosPrim(nodoVuelo.getDato().getNumeroCompradosPrim() - 1);
             if (!nodoVuelo.getDato().getColaEsperaPrimera().esVacia()) {
