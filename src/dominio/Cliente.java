@@ -12,7 +12,7 @@ public class Cliente implements Comparable<Cliente> {
     public Cliente(String _pasaporte,String _nombre, int _edad) {
         this.setNombre(_nombre);
         this.setPasaporte(_pasaporte);
-        this.setEdad(_edad);
+        this.setEdad(edad);
         this.pasajesCompradosDevueltos = new ListaSimple<>();
 
     }
@@ -42,7 +42,7 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     public String toString() {
-        return this.getPasaporte() + "-" + this.getNombre() + "-" + getEdad()+"|\n";
+        return this.getPasaporte() + "-" + this.getNombre() + "-" + getEdad()+"|";
 
     }
 

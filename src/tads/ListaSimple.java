@@ -187,18 +187,16 @@ public class ListaSimple<T extends Comparable<T>> implements IListaSimple<T> {
         return inicio;
     }
 
-    @Override
     public void agregarOrd(T n) {
         if (this.cantElementos < this.cantMax) {
             if (this.esVacia() || this.inicio.getDato().compareTo(n) >= 0) {
                 this.agregarInicio(n);
-
+                return;
             }
             Nodo<T> aux = this.inicio;
             while (aux.getSiguiente() != null && aux.getSiguiente().getDato().compareTo(n) < 0) {
                 aux = aux.getSiguiente();
             }
-
             Nodo<T> nuevoNodo = new Nodo<>(n);
             nuevoNodo.setSiguiente(aux.getSiguiente());
             aux.setSiguiente(nuevoNodo);

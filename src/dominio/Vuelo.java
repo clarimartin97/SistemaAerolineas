@@ -131,8 +131,7 @@ public class Vuelo implements Comparable<Vuelo> {
     }
     @Override
     public String toString() {
-        return this.getCodigoVuelo() ;
-             
+        return this.getCodigoVuelo() + "-" + this.getAerolinea() + "-" + this.getCodAvion() + "|" ;
     }
 
     @Override

@@ -117,11 +117,9 @@ public class Sistema implements IObligatorio {
         if (nodoExistente != null) {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
-        clientes.agregarInicio(cliente);
+        clientes.agregarOrd(cliente);
         return new Retorno(Retorno.Resultado.OK);
-        
     }
-    
 
     @Override
     public Retorno crearVuelo(String codigoVuelo, String aerolinea, String codAvion, String paisDestino, int dia,
