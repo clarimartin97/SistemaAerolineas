@@ -34,7 +34,7 @@ public class Cola<T extends Comparable<T>> implements ICola<T> {
         if (!this.esVacia()) {
 
             if (cantElementos == 1) {
-                inicio = null; //To change body of generated methods, choose Tools | Templates.
+                inicio = null;
                 fin = null;
                 cantElementos = 0;
             } else {

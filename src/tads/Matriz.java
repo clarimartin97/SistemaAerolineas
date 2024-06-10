@@ -4,7 +4,7 @@
  */
 package tads;
 
-public class Matriz<T>  implements IMatriz<T> {
+public class Matriz<T> implements IMatriz<T> {
 
     private T[][] matriz;
     private int filas;
@@ -51,7 +51,7 @@ public class Matriz<T>  implements IMatriz<T> {
     public String mostrarMatriz(Matriz<T> mat) {
         String aux = "";
         for (int i = 0; i < mat.getFilas(); i++) {
-            aux+= "*  ";
+            aux += "*  ";
             for (int j = 0; j < mat.getColumnas(); j++) {
                 aux += mat.getValor(i, j) + "  *  ";
             }
@@ -60,30 +60,18 @@ public class Matriz<T>  implements IMatriz<T> {
         return aux;
     }
 
-    /**
-     * @return the filas
-     */
     public int getFilas() {
         return filas;
     }
 
-    /**
-     * @param filas the filas to set
-     */
     public void setFilas(int filas) {
         this.filas = filas;
     }
 
-    /**
-     * @return the columnas
-     */
     public int getColumnas() {
         return columnas;
     }
 
-    /**
-     * @param columnas the columnas to set
-     */
     public void setColumnas(int columnas) {
         this.columnas = columnas;
     }

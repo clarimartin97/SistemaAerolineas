@@ -80,7 +80,6 @@ public class IObligatorioTest {
         r = miSistema.eliminarAerolinea("TAM Airlines");
         assertEquals(Retorno.error1().resultado, r.resultado);
     }
-    //////////////////////////////////////////////////////////////////////////
 
     @Test
     public void testEliminarAerolineaERROR2() {
@@ -201,18 +200,16 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.listarAerolineas();
         assertEquals(
-                "Cathay Pacific-Hong Kong-35|\nEthiopian Airlines-Etiopía-15|\nQantas-Australia-40|\nThai Airways-Tailandia-25|", r.valorString);
+                "Cathay Pacific-Hong Kong-35|\nEthiopian Airlines-Etiopía-15|\nQantas-Australia-40|\nThai Airways-Tailandia-25|",
+                r.valorString);
     }
 
-    ///////////////////////////////////////////////////////////////// creado por nos
     @Test
     public void testListarAerolineasVacio() {
         Retorno r = miSistema.listarAerolineas();
         assertEquals("", r.valorString);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testListarAvionesDeAerolinea() {
         Retorno r = miSistema.crearAerolinea("Ethiopian Airlines", "Etiopía", 15);
@@ -230,8 +227,6 @@ public class IObligatorioTest {
 
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testListarAvionesDeAerolineaVacia() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -241,8 +236,6 @@ public class IObligatorioTest {
         assertEquals("", r.valorString);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testRegistrarClienteOK() {
         Retorno r = miSistema.crearSistemaDeGestion();
@@ -255,8 +248,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testRegistrarClienteERROR1() {
         Retorno r = miSistema.crearSistemaDeGestion();
@@ -266,8 +257,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error1().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testRegistrarClienteERROR2() {
         Retorno r = miSistema.crearSistemaDeGestion();
@@ -280,7 +269,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error2().resultado, r.resultado);
     }
 
-//    ///////////////////////////////////////////////////////////////// creado por nos
     @Test
     public void testRegistrarClienteERROR3() {
         Retorno r = miSistema.crearSistemaDeGestion();
@@ -292,7 +280,6 @@ public class IObligatorioTest {
         r = miSistema.registrarCliente("TUV6789", "Sofia Gonzalez", 28);
         assertEquals(Retorno.error3().resultado, r.resultado);
     }
-//
 
     @Test
     public void testCrearClienteOK() {
@@ -334,8 +321,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR1() {
 
@@ -353,8 +338,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error1().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR2() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -369,8 +352,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error2().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR3() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -385,8 +366,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error3().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR4() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -401,8 +380,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error4().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR5A() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -417,8 +394,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR5B() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -433,8 +408,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error5().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testCrearVueloERROR6() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -451,7 +424,6 @@ public class IObligatorioTest {
 
     @Test
     public void testFuncionaColaEsperaOK() {
-        //Creación de clientes
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.registrarCliente("VM32132", "Veronida Miguez", 34);
@@ -462,20 +434,16 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.registrarCliente("ES99231", "Estela Silva", 15);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        //Creación de aerolineas
         r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        //Creación de aviones
         r = miSistema.registrarAvion("FLY221", 9, "Aerolineas Argentinas");
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.registrarAvion("FLY222", 18, "Aerolineas Argentinas");
         assertEquals(Retorno.ok().resultado, r.resultado);
-        //Creación de vuelos
         r = miSistema.crearVuelo("AA1111", "Aerolineas Argentinas", "FLY221", "Uruguay", 10, 12, 2024, 6, 3);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.crearVuelo("AA2222", "Aerolineas Argentinas", "FLY222", "Uruguay", 11, 11, 2024, 12, 6);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        //Compra de pasajes (hay disponible)
         r = miSistema.comprarPasaje("MF34111", "AA1111", 2);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.comprarPasaje("VM32132", "AA1111", 2);
@@ -488,25 +456,16 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.comprarPasaje("GV99882", "AA2222", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
-        // Lista de los comprados
         r = miSistema.pasajesPrimera("AA1111");
         assertEquals("CB34555-AA1111|\nVM32132-AA1111|\nMF34111-AA1111|", r.valorString);
-
-        // Lista Cola espera
         r = miSistema.colaPrimera("AA1111");
         assertEquals("GV99882-AA1111| - ", r.valorString);
-
-        // Lista nueva comprados
-        //Devuelvo
         r = miSistema.devolverPasaje("MF34111", "AA1111");
         assertEquals(Retorno.ok().resultado, r.resultado);
-        //Muestro lista nuevamente
         r = miSistema.pasajesPrimera("AA1111");
         assertEquals("GV99882-AA1111|\nCB34555-AA1111|\nVM32132-AA1111|", r.valorString);
-        //Muestro cola que deberia estar vacia
         r = miSistema.colaPrimera("AA1111");
         assertEquals("", r.valorString);
-
     }
 
     @Test
@@ -526,16 +485,18 @@ public class IObligatorioTest {
         r = miSistema.crearVuelo("AA3333", "Aerolineas Argentinas", "FLY221", "Uruguay", 5, 9, 2024, 3, 12);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.listarVuelos();
-        assertEquals("AA1111-Aerolineas Argentinas-FLY221-0-0-15|\nAA2222-Aerolineas Argentinas-FLY221-0-0-15|\nAA3333-Aerolineas Argentinas-FLY221-0-0-15|", r.valorString);
-
-        //Compra de pasajes
+        assertEquals(
+                "AA1111-Aerolineas Argentinas-FLY221-0-0-15|\nAA2222-Aerolineas Argentinas-FLY221-0-0-15|\nAA3333-Aerolineas Argentinas-FLY221-0-0-15|",
+                r.valorString);
         r = miSistema.comprarPasaje("MF34111", "AA1111", 1);
         assertEquals(Retorno.ok().resultado, r.resultado);
         r = miSistema.comprarPasaje("VM32132", "AA2222", 2);
         assertEquals(Retorno.ok().resultado, r.resultado);
 
         r = miSistema.listarVuelos();
-        assertEquals("AA1111-Aerolineas Argentinas-FLY221-1-0-14|\nAA2222-Aerolineas Argentinas-FLY221-0-1-14|\nAA3333-Aerolineas Argentinas-FLY221-0-0-15|", r.valorString);
+        assertEquals(
+                "AA1111-Aerolineas Argentinas-FLY221-1-0-14|\nAA2222-Aerolineas Argentinas-FLY221-0-1-14|\nAA3333-Aerolineas Argentinas-FLY221-0-0-15|",
+                r.valorString);
     }
 
     @Test
@@ -563,8 +524,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testComprarPasajeERROR1() {
         Retorno r = miSistema.crearAerolinea("Aerolineas Argentinas", "Argentina", 10);
@@ -577,8 +536,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error1().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testComprarPasajeERROR2() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
@@ -592,10 +549,6 @@ public class IObligatorioTest {
         r = miSistema.comprarPasaje("MF34111", "AA1155", 1);
         assertEquals(Retorno.error2().resultado, r.resultado);
     }
-
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
- 
 
     @Test
     public void testDevolverPasajeOK() {
@@ -625,8 +578,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.ok().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testDevolverPasajeERROR1() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
@@ -643,8 +594,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error1().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testDevolverPasajeERROR2() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);
@@ -661,8 +610,6 @@ public class IObligatorioTest {
         assertEquals(Retorno.error2().resultado, r.resultado);
     }
 
-    /////////////////////////////////////////////////////////////////// creado por
-    /////////////////////////////////////////////////////////////////// nos
     @Test
     public void testDevolverPasajeERROR3() {
         Retorno r = miSistema.registrarCliente("MF34111", "Martina Fernandez", 1);

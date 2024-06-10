@@ -1,6 +1,3 @@
-//import dominio.Avion;
-//import java.util.ArrayList;
-//import java.util.List;
 package dominio;
 
 import java.util.Objects;
@@ -63,7 +60,7 @@ public class Aerolinea implements Comparable<Aerolinea> {
     }
 
     public String toString() {
-        return this.getNombre() + "-" + this.getPais() + "-" + this.getCantMaxAviones()+ "|";
+        return this.getNombre() + "-" + this.getPais() + "-" + this.getCantMaxAviones() + "|";
     }
 
     @Override
